@@ -5,7 +5,9 @@
 package tetris;
 
 import net.orfjackal.nestedjunit.NestedJUnit4;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -14,7 +16,6 @@ import org.junit.runner.RunWith;
 @RunWith(NestedJUnit4.class)
 public class RotatingPiecesOfBlocksTest extends Assert {
 
-/*
     private Piece piece;
 
 
@@ -36,25 +37,24 @@ public class RotatingPiecesOfBlocksTest extends Assert {
                     "...\n", piece.toString());
         }
 
-//        @Test
-//        public void can_be_rotated_right() {
-//            piece = piece.rotateRight();
-//            assertEquals("" +
-//                    "...\n" +
-//                    ".XX\n" +
-//                    "...\n", piece.toString());
-//        }
+        @Test
+        public void can_be_rotated_right() {
+            piece = piece.rotateRight();
+            assertEquals("" +
+                    "...\n" +
+                    ".XX\n" +
+                    "...\n", piece.toString());
+        }
 
-//        @Test
-//        public void can_be_rotated_left() {
-//            piece = piece.rotateLeft();
-//            assertEquals("" +
-//                    "...\n" +
-//                    "XX.\n" +
-//                    "...\n", piece.toString());
-//        }
+        @Test
+        public void can_be_rotated_left() {
+            piece = piece.rotateLeft();
+            assertEquals("" +
+                    "...\n" +
+                    "XX.\n" +
+                    "...\n", piece.toString());
+        }
     }
-*/
 
 /*
     public class A_piece_of_5x5_blocks {
