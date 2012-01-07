@@ -1,5 +1,6 @@
 package tetris;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ public class Board {
     private final int rows;
     private final int columns;
 
-    private Block fallingBlock = null;
+    private List<Block> fallingBlocks = null;
     private List<Block> blocksFallenOnBoard = new LinkedList<Block>();
 
     public Board(int rows, int columns) {
@@ -16,12 +17,16 @@ public class Board {
         this.columns = columns;
     }
 
-    public Block getFallingBlock() {
-        return fallingBlock;
+    public List<Block> getFallingBlocks() {
+        return fallingBlocks;
     }
 
-    public void setFallingBlock(Block fallingBlock) {
-        this.fallingBlock = fallingBlock;
+    public void setFallingBlocks(List<Block> fallingBlocks) {
+        this.fallingBlocks = fallingBlocks;
+    }
+
+    public void setFallingBlocks(Piece piece) {
+        this.fallingBlocks = piece.getPieceStructure();
     }
 
     public List<Block> getBlocksFallenOnBoard() {
@@ -32,8 +37,9 @@ public class Board {
         String s = "";
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
-                if (this.isFallingBlockInPosition(row, col)) {
-                    s += this.getFallingBlock().getBlockName();
+                Block fallingBlockInPosition = getFallingBlockInPosition(row, col);
+                if (fallingBlockInPosition != null && fallingBlockInPosition.getBlockName() != '\n') {
+                    s += fallingBlockInPosition.getBlockName();
                 } else {
                     Block fallenBlock = this.getFallenBlockInPosition(row, col);
                     if (fallenBlock != null) {
@@ -58,28 +64,55 @@ public class Board {
     }
 
     public boolean hasFalling() {
-        return this.getFallingBlock() != null;
+        return this.getFallingBlocks() != null;
     }
 
-    private boolean isFallingBlockInPosition(int row, int col) {
-        return this.getFallingBlock() != null
-                && this.getFallingBlock().getRowPosition() == row
-                && this.getFallingBlock().getColumnPosition() == col;
+    private Block getFallingBlockInPosition(int row, int col) {
+        if (fallingBlocks != null) {
+            for (Block fallingBlock : fallingBlocks) {
+                if (fallingBlock.getRowPosition() == row
+                    && fallingBlock.getColumnPosition() == col) {
+                    return fallingBlock;
+                }
+            }
+        }
+        return null;
     }
 
     private boolean canBlockStillFalling() {
-        for (Block block : this.getBlocksFallenOnBoard()) {
-            if (this.getFallingBlock().getColumnPosition() == block.getColumnPosition()
-                    && this.getFallingBlock().getRowPosition() + 1 == block.getRowPosition()) {
-                return false;
+        int mostLowerBlockRow = 0;
+        for (Block fallingBlock : this.getFallingBlocks()) {
+            for (Block block : this.getBlocksFallenOnBoard()) {
+                if (fallingBlock.getColumnPosition() == block.getColumnPosition()
+                    && fallingBlock.getRowPosition() + 1 == block.getRowPosition()) {
+                    return false;
+                }
+            }
+            if (fallingBlock.getRowPosition() > mostLowerBlockRow) {
+                mostLowerBlockRow = fallingBlock.getRowPosition();
             }
         }
-        return (this.getFallingBlock().getRowPosition() < this.rows - 1);
+        return (mostLowerBlockRow < this.rows - 1);
     }
 
     public void drop(Block block) {
-        if (this.getFallingBlock() == null) {
-            this.setFallingBlock(block);
+        if (this.getFallingBlocks() == null) {
+            List<Block> fallingBlocks = new ArrayList<Block>();
+            fallingBlocks.add(block);
+            this.setFallingBlocks(fallingBlocks);
+        } else {
+            throw new IllegalStateException("already falling");
+        }
+    }
+
+    public void drop(Tetromino shape) {
+        if (this.getFallingBlocks() == null) {
+            Piece shapePiece = shape.getShapePiece();
+            for (Block block : shapePiece.getPieceStructure()) {
+                // dropping in the middle
+                block.setColumnPosition(block.getColumnPosition() + columns / 2 - 1);
+            }
+            this.setFallingBlocks(shapePiece);
         } else {
             throw new IllegalStateException("already falling");
         }
@@ -87,10 +120,12 @@ public class Board {
 
     public void tick() {
         if (this.canBlockStillFalling()) {
-            this.getFallingBlock().setRowPosition(this.getFallingBlock().getRowPosition() + 1);
+            for (Block fallingBlock : this.getFallingBlocks()) {
+                fallingBlock.setRowPosition(fallingBlock.getRowPosition() + 1);
+            }
         } else if (this.hasFalling()) {
-            this.getBlocksFallenOnBoard().add(this.getFallingBlock());
-            this.setFallingBlock(null);
+            this.getBlocksFallenOnBoard().addAll(this.getFallingBlocks());
+            this.setFallingBlocks((List<Block>) null);
         }
     }
 }

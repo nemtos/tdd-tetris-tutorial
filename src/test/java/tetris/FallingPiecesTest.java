@@ -5,7 +5,9 @@
 package tetris;
 
 import net.orfjackal.nestedjunit.NestedJUnit4;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -14,7 +16,6 @@ import org.junit.runner.RunWith;
 @RunWith(NestedJUnit4.class)
 public class FallingPiecesTest extends Assert {
 
-/*
     private final Board board = new Board(6, 8);
 
 
@@ -28,15 +29,14 @@ public class FallingPiecesTest extends Assert {
         @Test
         public void it_starts_from_top_middle() {
             assertEquals("" +
-                    "....T...\n" +
-                    "...TTT..\n" +
-                    "........\n" +
-                    "........\n" +
-                    "........\n" +
-                    "........\n", board.toString());
+                         "....T...\n" +
+                         "...TTT..\n" +
+                         "........\n" +
+                         "........\n" +
+                         "........\n" +
+                         "........\n", board.toString());
         }
     }
-*/
 
 /*
     public class When_a_piece_reaches_the_bottom {

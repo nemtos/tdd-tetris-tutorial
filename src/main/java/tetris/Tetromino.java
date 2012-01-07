@@ -9,6 +9,14 @@ public class Tetromino {
                                                           "TTT\n" +
                                                           "...\n");
 
+    public static final Tetromino I_SHAPE = new Tetromino(".....\n" +
+                                                          ".....\n" +
+                                                          "IIII.\n" +
+                                                          ".....\n" +
+                                                          ".....\n");
+    public static final Tetromino O_SHAPE = new Tetromino(".OO\n" +
+                                                          ".OO\n" +
+                                                          "...\n");
     private Piece shapePiece;
 
     public Tetromino(String pieceShape) {
@@ -19,13 +27,33 @@ public class Tetromino {
         this.shapePiece = pieceShape;
     }
 
+    public Piece getShapePiece() {
+        return shapePiece;
+    }
+
+    public void setShapePiece(Piece shapePiece) {
+        this.shapePiece = shapePiece;
+    }
 
     public Tetromino rotateRight() {
-        return new Tetromino(new Piece(shapePiece.toString()).rotateRight());
+        if (this.equals(Tetromino.I_SHAPE)) {
+            return new Tetromino(new Piece(shapePiece.toString()).rotateLeft());
+        } else if (this.equals(Tetromino.O_SHAPE)) {
+            return this;
+        } else {
+            return new Tetromino(new Piece(shapePiece.toString()).rotateRight());
+        }
     }
 
     public Tetromino rotateLeft() {
-        return new Tetromino(new Piece(shapePiece.toString()).rotateLeft());
+        if (this.shapePiece.toString().equals(new Piece(Tetromino.I_SHAPE.shapePiece.toString()).rotateLeft().toString())) {
+            return new Tetromino(new Piece(shapePiece.toString()).rotateRight());
+        }
+        if (this.equals(Tetromino.O_SHAPE)) {
+            return this;
+        } else {
+            return new Tetromino(new Piece(shapePiece.toString()).rotateLeft());
+        }
     }
 
     @Override

@@ -9,8 +9,8 @@ import java.util.List;
  * Time: 15:48
  */
 public class Piece {
-    List<Block> pieceStructure = new ArrayList<Block>();
-    int pieceLength = 3;
+    private List<Block> pieceStructure = new ArrayList<Block>();
+    private int pieceLength = 3;
 
     public Piece(String pieceStructure) {
         this.pieceStructure = getPieceStructure(pieceStructure);
@@ -37,6 +37,10 @@ public class Piece {
         }
 
         return structure;
+    }
+
+    public List<Block> getPieceStructure() {
+        return pieceStructure;
     }
 
     @Override
