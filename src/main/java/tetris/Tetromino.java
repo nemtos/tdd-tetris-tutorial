@@ -15,12 +15,21 @@ public class Tetromino {
         this.shapePiece = new Piece(pieceShape);
     }
 
-
-    public void rotateRight() {
-        new Piece(shapePiece.toString()).rotateRight();
+    public Tetromino(Piece pieceShape) {
+        this.shapePiece = pieceShape;
     }
 
-    public void rotateLeft() {
-        new Piece(shapePiece.toString()).rotateLeft();
+
+    public Tetromino rotateRight() {
+        return new Tetromino(new Piece(shapePiece.toString()).rotateRight());
+    }
+
+    public Tetromino rotateLeft() {
+        return new Tetromino(new Piece(shapePiece.toString()).rotateLeft());
+    }
+
+    @Override
+    public String toString() {
+        return shapePiece.toString();
     }
 }

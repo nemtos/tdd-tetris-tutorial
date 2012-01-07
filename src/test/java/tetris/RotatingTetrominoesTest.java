@@ -36,7 +36,6 @@ public class RotatingTetrominoesTest extends Assert {
         }
     }
 
-/*
     public class The_T_shape {
 
         @Before
@@ -47,59 +46,58 @@ public class RotatingTetrominoesTest extends Assert {
         @Test
         public void is_shaped_like_T() {
             assertEquals("" +
-                    ".T.\n" +
-                    "TTT\n" +
-                    "...\n", shape.toString());
+                         ".T.\n" +
+                         "TTT\n" +
+                         "...\n", shape.toString());
         }
 
-//        @Test
-//        public void can_be_rotated_right_3_times() {
-//            shape = shape.rotateRight();
-//            assertEquals("" +
-//                    ".T.\n" +
-//                    ".TT\n" +
-//                    ".T.\n", shape.toString());
-//            shape = shape.rotateRight();
-//            assertEquals("" +
-//                    "...\n" +
-//                    "TTT\n" +
-//                    ".T.\n", shape.toString());
-//            shape = shape.rotateRight();
-//            assertEquals("" +
-//                    ".T.\n" +
-//                    "TT.\n" +
-//                    ".T.\n", shape.toString());
-//        }
+        @Test
+        public void can_be_rotated_right_3_times() {
+            shape = shape.rotateRight();
+            assertEquals("" +
+                         ".T.\n" +
+                         ".TT\n" +
+                         ".T.\n", shape.toString());
+            shape = shape.rotateRight();
+            assertEquals("" +
+                         "...\n" +
+                         "TTT\n" +
+                         ".T.\n", shape.toString());
+            shape = shape.rotateRight();
+            assertEquals("" +
+                         ".T.\n" +
+                         "TT.\n" +
+                         ".T.\n", shape.toString());
+        }
 
-//        @Test
-//        public void can_be_rotated_left_3_times() {
-//            shape = shape.rotateLeft();
-//            assertEquals("" +
-//                    ".T.\n" +
-//                    "TT.\n" +
-//                    ".T.\n", shape.toString());
-//            shape = shape.rotateLeft();
-//            assertEquals("" +
-//                    "...\n" +
-//                    "TTT\n" +
-//                    ".T.\n", shape.toString());
-//            shape = shape.rotateLeft();
-//            assertEquals("" +
-//                    ".T.\n" +
-//                    ".TT\n" +
-//                    ".T.\n", shape.toString());
-//        }
+        @Test
+        public void can_be_rotated_left_3_times() {
+            shape = shape.rotateLeft();
+            assertEquals("" +
+                         ".T.\n" +
+                         "TT.\n" +
+                         ".T.\n", shape.toString());
+            shape = shape.rotateLeft();
+            assertEquals("" +
+                         "...\n" +
+                         "TTT\n" +
+                         ".T.\n", shape.toString());
+            shape = shape.rotateLeft();
+            assertEquals("" +
+                         ".T.\n" +
+                         ".TT\n" +
+                         ".T.\n", shape.toString());
+        }
 
-//        @Test
-//        public void rotating_it_4_times_will_go_back_to_the_original_shape() {
-//            String originalShape = shape.toString();
-//            shape = shape.rotateRight().rotateRight().rotateRight().rotateRight();
-//            assertEquals(originalShape, shape.toString());
-//            shape = shape.rotateLeft().rotateLeft().rotateLeft().rotateLeft();
-//            assertEquals(originalShape, shape.toString());
-//        }
+        @Test
+        public void rotating_it_4_times_will_go_back_to_the_original_shape() {
+            String originalShape = shape.toString();
+            shape = shape.rotateRight().rotateRight().rotateRight().rotateRight();
+            assertEquals(originalShape, shape.toString());
+            shape = shape.rotateLeft().rotateLeft().rotateLeft().rotateLeft();
+            assertEquals(originalShape, shape.toString());
+        }
     }
-*/
 
 /*
     public class The_I_shape {
