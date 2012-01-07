@@ -9,14 +9,16 @@ import java.util.List;
  * Time: 15:48
  */
 public class Piece {
-    List<Block> pieceStructure = new ArrayList<Block>(12);
+    List<Block> pieceStructure = new ArrayList<Block>();
+    int pieceLength = 3;
 
     public Piece(String pieceStructure) {
         this.pieceStructure = getPieceStructure(pieceStructure);
     }
 
     private List<Block> getPieceStructure(String pieceStructure) {
-        List<Block> structure = new ArrayList<Block>(12);
+        this.pieceLength = pieceStructure.substring(0, pieceStructure.indexOf('\n')).length();
+        List<Block> structure = new ArrayList<Block>(this.pieceLength * (this.pieceLength + 1));
         int rowPosition = 0;
         int colPosition = 0;
         for (int i = 0; i < pieceStructure.toCharArray().length; i++) {
@@ -26,7 +28,7 @@ public class Piece {
             block.setColumnPosition(colPosition);
 
             colPosition++;
-            if (colPosition > 3) {
+            if (colPosition > this.pieceLength) {
                 colPosition = 0;
                 rowPosition++;
             }
@@ -47,76 +49,34 @@ public class Piece {
     }
 
     public Piece rotateRight() {
-        Block[] orderedBlocks = new Block[12];
+        Block[] orderedBlocks = new Block[this.pieceLength * (this.pieceLength + 1)];
+        int pivot = (this.pieceLength - 1) / 2;
         for (Block block : pieceStructure) {
             if (block.getBlockName() != '\n') {
-                if (block.getRowPosition() == 0) {
-                    if (block.getColumnPosition() == 0) {
-                        block.setColumnPosition(2);
-                    } else if (block.getColumnPosition() == 1) {
-                        block.setRowPosition(1);
-                        block.setColumnPosition(2);
-                    } else {
-                        block.setRowPosition(2);
-                    }
-                } else if (block.getRowPosition() == 1) {
-                    if (block.getColumnPosition() == 0) {
-                        block.setRowPosition(0);
-                        block.setColumnPosition(1);
-                    } else if (block.getColumnPosition() == 2) {
-                        block.setRowPosition(2);
-                        block.setColumnPosition(1);
-                    }
-                } else if (block.getRowPosition() == 2) {
-                    if (block.getColumnPosition() == 0) {
-                        block.setRowPosition(0);
-                    } else if (block.getColumnPosition() == 1) {
-                        block.setRowPosition(1);
-                        block.setColumnPosition(0);
-                    } else {
-                        block.setColumnPosition(0);
-                    }
-                }
+                int newRow = block.getColumnPosition();
+                int newCol = pivot + (pivot - block.getRowPosition());
+
+                block.setRowPosition(newRow);
+                block.setColumnPosition(newCol);
             }
-            orderedBlocks[block.getColumnPosition() + 4 * block.getRowPosition()] = block;
+            orderedBlocks[block.getColumnPosition() + (this.pieceLength + 1) * block.getRowPosition()] = block;
         }
         pieceStructure = Arrays.asList(orderedBlocks);
         return this;
     }
 
     public Piece rotateLeft() {
-        Block[] orderedBlocks = new Block[12];
+        Block[] orderedBlocks = new Block[this.pieceLength * (this.pieceLength + 1)];
+        int pivot = (this.pieceLength - 1) / 2;
         for (Block block : pieceStructure) {
             if (block.getBlockName() != '\n') {
-                if (block.getRowPosition() == 0) {
-                    if (block.getColumnPosition() == 0) {
-                        block.setRowPosition(2);
-                    } else if (block.getColumnPosition() == 1) {
-                        block.setRowPosition(1);
-                        block.setColumnPosition(0);
-                    } else {
-                        block.setColumnPosition(0);
-                    }
-                } else if (block.getRowPosition() == 1) {
-                    if (block.getColumnPosition() == 0) {
-                        block.setRowPosition(2);
-                        block.setColumnPosition(1);
-                    } else if (block.getColumnPosition() == 2) {
-                        block.setRowPosition(0);
-                        block.setColumnPosition(1);
-                    }
-                } else if (block.getRowPosition() == 2) {
-                    if (block.getColumnPosition() == 0) {
-                        block.setColumnPosition(2);
-                    } else if (block.getColumnPosition() == 1) {
-                        block.setRowPosition(1);
-                        block.setColumnPosition(2);
-                    } else {
-                        block.setRowPosition(0);
-                    }
-                }
+                int newRow = pivot + (pivot - block.getColumnPosition());
+                int newCol = block.getRowPosition();
+
+                block.setRowPosition(newRow);
+                block.setColumnPosition(newCol);
             }
-            orderedBlocks[block.getColumnPosition() + 4 * block.getRowPosition()] = block;
+            orderedBlocks[block.getColumnPosition() + (this.pieceLength + 1) * block.getRowPosition()] = block;
         }
         pieceStructure = Arrays.asList(orderedBlocks);
         return this;
