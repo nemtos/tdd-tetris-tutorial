@@ -5,7 +5,9 @@
 package tetris;
 
 import net.orfjackal.nestedjunit.NestedJUnit4;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -27,13 +29,13 @@ public class FallingBlocksTest extends Assert {
                     "...\n", board.toString());
         }
 
-//        @Test
-//        public void has_no_falling_blocks() {
-//            assertFalse(board.hasFalling());
-//        }
+        @Test
+        public void has_no_falling_blocks() {
+            assertFalse(board.hasFalling());
+        }
     }
 
-/*
+
     public class When_a_block_is_dropped {
 
         @Before
@@ -46,38 +48,37 @@ public class FallingBlocksTest extends Assert {
             assertTrue(board.hasFalling());
         }
 
-//        @Test
-//        public void it_starts_from_the_top_middle() {
-//            assertEquals("" +
-//                    ".X.\n" +
-//                    "...\n" +
-//                    "...\n", board.toString());
-//        }
+        @Test
+        public void it_starts_from_the_top_middle() {
+            assertEquals("" +
+                    ".X.\n" +
+                    "...\n" +
+                    "...\n", board.toString());
+        }
 
-//        @Test
-//        public void it_moves_down_one_row_per_tick() {
-//            board.tick();
-//            assertEquals("" +
-//                    "...\n" +
-//                    ".X.\n" +
-//                    "...\n", board.toString());
-//        }
+        @Test
+        public void it_moves_down_one_row_per_tick() {
+            board.tick();
+            assertEquals("" +
+                    "...\n" +
+                    ".X.\n" +
+                    "...\n", board.toString());
+        }
 
-//        @Test
-//        public void at_most_one_block_may_be_falling_at_a_time() {
-//            try {
-//                board.drop(new Block('Y'));
-//                fail();
-//            } catch (IllegalStateException e) {
-//                assertTrue(e.getMessage().contains("already falling"));
-//            }
-//            assertEquals("" +
-//                    ".X.\n" +
-//                    "...\n" +
-//                    "...\n", board.toString());
-//        }
+        @Test
+        public void at_most_one_block_may_be_falling_at_a_time() {
+            try {
+                board.drop(new Block('Y'));
+                fail();
+            } catch (IllegalStateException e) {
+                assertTrue(e.getMessage().contains("already falling"));
+            }
+            assertEquals("" +
+                    ".X.\n" +
+                    "...\n" +
+                    "...\n", board.toString());
+        }
     }
-*/
 
 /*
     public class When_a_block_reaches_the_bottom {
