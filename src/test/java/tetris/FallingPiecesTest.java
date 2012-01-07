@@ -38,7 +38,6 @@ public class FallingPiecesTest extends Assert {
         }
     }
 
-/*
     public class When_a_piece_reaches_the_bottom {
 
         @Before
@@ -53,29 +52,28 @@ public class FallingPiecesTest extends Assert {
         @Test
         public void it_is_still_falling_on_the_last_row() {
             assertEquals("" +
-                    "........\n" +
-                    "........\n" +
-                    "........\n" +
-                    "........\n" +
-                    "....T...\n" +
-                    "...TTT..\n", board.toString());
+                         "........\n" +
+                         "........\n" +
+                         "........\n" +
+                         "........\n" +
+                         "....T...\n" +
+                         "...TTT..\n", board.toString());
             assertTrue(board.hasFalling());
         }
 
-//        @Test
-//        public void it_stops_when_it_hits_the_bottom() {
-//            board.tick();
-//            assertEquals("" +
-//                    "........\n" +
-//                    "........\n" +
-//                    "........\n" +
-//                    "........\n" +
-//                    "....T...\n" +
-//                    "...TTT..\n", board.toString());
-//            assertFalse(board.hasFalling());
-//        }
+        @Test
+        public void it_stops_when_it_hits_the_bottom() {
+            board.tick();
+            assertEquals("" +
+                         "........\n" +
+                         "........\n" +
+                         "........\n" +
+                         "........\n" +
+                         "....T...\n" +
+                         "...TTT..\n", board.toString());
+            assertFalse(board.hasFalling());
+        }
     }
-*/
 
 /*
     public class When_a_piece_lands_on_another_piece {

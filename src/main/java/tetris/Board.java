@@ -88,7 +88,7 @@ public class Board {
                     return false;
                 }
             }
-            if (fallingBlock.getRowPosition() > mostLowerBlockRow) {
+            if (fallingBlock.getRowPosition() > mostLowerBlockRow && fallingBlock.getBlockName() != '.' && fallingBlock.getBlockName() != '\n') {
                 mostLowerBlockRow = fallingBlock.getRowPosition();
             }
         }
@@ -124,7 +124,11 @@ public class Board {
                 fallingBlock.setRowPosition(fallingBlock.getRowPosition() + 1);
             }
         } else if (this.hasFalling()) {
-            this.getBlocksFallenOnBoard().addAll(this.getFallingBlocks());
+            for (Block fallingBlock : this.getFallingBlocks()) {
+                if (fallingBlock.getBlockName() != '.' && fallingBlock.getBlockName() != '\n') {
+                    this.getBlocksFallenOnBoard().add(fallingBlock);
+                }
+            }
             this.setFallingBlocks((List<Block>) null);
         }
     }

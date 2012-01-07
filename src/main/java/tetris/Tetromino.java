@@ -28,11 +28,7 @@ public class Tetromino {
     }
 
     public Piece getShapePiece() {
-        return shapePiece;
-    }
-
-    public void setShapePiece(Piece shapePiece) {
-        this.shapePiece = shapePiece;
+        return new Piece(shapePiece.toString());
     }
 
     public Tetromino rotateRight() {
