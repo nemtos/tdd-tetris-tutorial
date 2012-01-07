@@ -38,7 +38,7 @@ public class Board {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 Block fallingBlockInPosition = getFallingBlockInPosition(row, col);
-                if (fallingBlockInPosition != null && fallingBlockInPosition.getBlockName() != '\n') {
+                if (fallingBlockInPosition != null && fallingBlockInPosition.getBlockName() != '\n' && fallingBlockInPosition.getBlockName() != '.') {
                     s += fallingBlockInPosition.getBlockName();
                 } else {
                     Block fallenBlock = this.getFallenBlockInPosition(row, col);
@@ -84,7 +84,8 @@ public class Board {
         for (Block fallingBlock : this.getFallingBlocks()) {
             for (Block block : this.getBlocksFallenOnBoard()) {
                 if (fallingBlock.getColumnPosition() == block.getColumnPosition()
-                    && fallingBlock.getRowPosition() + 1 == block.getRowPosition()) {
+                    && fallingBlock.getRowPosition() + 1 == block.getRowPosition()
+                    && fallingBlock.getBlockName() != '.' && fallingBlock.getBlockName() != '\n') {
                     return false;
                 }
             }
