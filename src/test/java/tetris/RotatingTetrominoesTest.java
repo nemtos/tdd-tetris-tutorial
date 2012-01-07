@@ -5,7 +5,9 @@
 package tetris;
 
 import net.orfjackal.nestedjunit.NestedJUnit4;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -14,7 +16,6 @@ import org.junit.runner.RunWith;
 @RunWith(NestedJUnit4.class)
 public class RotatingTetrominoesTest extends Assert {
 
-/*
     private Tetromino shape;
 
 
@@ -34,7 +35,6 @@ public class RotatingTetrominoesTest extends Assert {
             assertEquals(original, shape.toString());
         }
     }
-*/
 
 /*
     public class The_T_shape {
