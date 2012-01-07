@@ -32,10 +32,10 @@ public class Board {
         String s = "";
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
-                if (isFallingBlockInPosition(row, col)) {
-                    s += getFallingBlock().getBlockName();
+                if (this.isFallingBlockInPosition(row, col)) {
+                    s += this.getFallingBlock().getBlockName();
                 } else {
-                    Block fallenBlock = getFallenBlockInPosition(row, col);
+                    Block fallenBlock = this.getFallenBlockInPosition(row, col);
                     if (fallenBlock != null) {
                         s += fallenBlock.getBlockName();
                     } else {
@@ -49,7 +49,7 @@ public class Board {
     }
 
     private Block getFallenBlockInPosition(int row, int col) {
-        for (Block block : getBlocksFallenOnBoard()) {
+        for (Block block : this.getBlocksFallenOnBoard()) {
             if (block.getRowPosition() == row && block.getColumnPosition() == col) {
                 return block;
             }
@@ -57,14 +57,24 @@ public class Board {
         return null;
     }
 
-    private boolean isFallingBlockInPosition(int row, int col) {
-        return getFallingBlock() != null
-                && getFallingBlock().getRowPosition() == row
-                && getFallingBlock().getColumnPosition() == col;
-    }
-
     public boolean hasFalling() {
         return this.getFallingBlock() != null;
+    }
+
+    private boolean isFallingBlockInPosition(int row, int col) {
+        return this.getFallingBlock() != null
+                && this.getFallingBlock().getRowPosition() == row
+                && this.getFallingBlock().getColumnPosition() == col;
+    }
+
+    private boolean canBlockStillFalling() {
+        for (Block block : this.getBlocksFallenOnBoard()) {
+            if (this.getFallingBlock().getColumnPosition() == block.getColumnPosition()
+                    && this.getFallingBlock().getRowPosition() + 1 == block.getRowPosition()) {
+                return false;
+            }
+        }
+        return (this.getFallingBlock().getRowPosition() < this.rows - 1);
     }
 
     public void drop(Block block) {
@@ -76,10 +86,10 @@ public class Board {
     }
 
     public void tick() {
-        if (this.getFallingBlock().getRowPosition() < rows - 1) {
+        if (this.canBlockStillFalling()) {
             this.getFallingBlock().setRowPosition(this.getFallingBlock().getRowPosition() + 1);
         } else if (this.hasFalling()) {
-            getBlocksFallenOnBoard().add(this.getFallingBlock());
+            this.getBlocksFallenOnBoard().add(this.getFallingBlock());
             this.setFallingBlock(null);
         }
     }
